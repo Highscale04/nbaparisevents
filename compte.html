@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Espace client | NBA Paris Game 2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kanit:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=49">
+</head>
+<body data-page="account">
+  <header class="page-head">
+    <div class="wrap">
+      <p class="crumbs" data-i18n="account.crumb">Compte</p>
+      <h1 data-i18n="account.h1">Espace client.</h1>
+    </div>
+  </header>
+  <main class="wrap account" id="espace"></main>
+  <script src="js/data.js"></script>
+  <script src="js/i18n.js?v=11"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/compte.js"></script>
+  <script src="js/chrome.js?v=8"></script>
+  <script>
+    const espace = document.getElementById("espace");
+
+    function champ(id, nom, type, auto, label) {
+      return `<label for="${id}">${label}</label><input id="${id}" name="${nom}" type="${type}" required autocomplete="${auto}">`;
+    }
+
+    function echapper(s) {
+      return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    }
+
+    function porte() {
+      espace.innerHTML = `
+        <div class="account-grid">
+          <form class="panel account-card" id="entrer">
+            <h2>${t("account.login")}</h2>
+            <p class="muted">${t("account.loginLead")}</p>
+            ${champ("login-mail", "email", "email", "username", t("account.mail"))}
+            ${champ("login-mdp", "mdp", "password", "current-password", t("account.pass"))}
+            <button class="account-switch" type="button" data-bascule="oublier">${t("account.forgot")}</button>
+            <p class="error" data-msg role="status"></p>
+            <button class="btn btn-red" type="submit">${t("account.submit")}</button>
+          </form>
+          <form class="panel account-card" id="creer">
+            <h2>${t("account.create")}</h2>
+            <p class="muted">${t("account.createLead")}</p>
+            <div class="form-row">
+              <div>${champ("creer-prenom", "prenom", "text", "given-name", t("cart.first"))}</div>
+              <div>${champ("creer-nom", "nom", "text", "family-name", t("cart.last"))}</div>
+            </div>
+            ${champ("creer-mail", "email", "email", "email", t("account.mail"))}
+            ${champ("creer-ville", "ville", "text", "address-level2", t("cart.city"))}
+            ${champ("creer-mdp", "mdp", "password", "new-password", t("account.pass"))}
+            ${champ("creer-mdp2", "mdp2", "password", "new-password", t("account.pass2"))}
+            <p class="error" data-msg role="status"></p>
+            <button class="btn btn-light" type="submit">${t("account.createBtn")}</button>
+          </form>
+          <form class="panel account-card" id="oublier" hidden>
+            <h2>${t("account.forgot")}</h2>
+            <p class="muted">${t("account.resetLead")}</p>
+            ${champ("oubli-mail", "email", "email", "username", t("account.mail"))}
+            ${champ("oubli-mdp", "mdp", "password", "new-password", t("account.pass"))}
+            ${champ("oubli-mdp2", "mdp2", "password", "new-password", t("account.pass2"))}
+            <p class="error" data-msg role="status"></p>
+            <button class="btn btn-red" type="submit">${t("account.resetBtn")}</button>
+            <button class="account-switch" type="button" data-bascule="entrer">${t("account.back")}</button>
+          </form>
+        </div>
+      `;
+    }
+
+    function salon() {
+      const compte = lireCompte();
+      const commandes = commandesCompte(compte.email).slice().reverse();
+      const locale = langue() === "en" ? "en-GB" : "fr-FR";
+      const lignes = commandes.length
+        ? commandes.map((c) => {
+            const jour = new Date(c.date).toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" });
+            const places = c.lignes.map((l) => `<div class="line"><span>${l.qte} × ${echapper(l.nom)}</span><strong>${euros(l.sousTotal)}</strong></div>`).join("");
+            return `<article class="account-order"><p class="code">${echapper(c.numero)}</p><p class="muted">${jour}</p>${places}<div class="line total"><span>${t("ok.total")}</span><span>${euros(c.total)}</span></div></article>`;
+          }).join("")
+        : `<p class="empty">${t("account.empty")}</p><a class="btn btn-light" href="billets.html">${t("cart.see")}</a>`;
+      espace.innerHTML = `
+        <div class="account-bar">
+          <p>${t("account.hello")} ${echapper(compte.prenom)}</p>
+          <button class="btn btn-ghost" type="button" data-sortir>${t("account.out")}</button>
+        </div>
+        <div class="layout">
+          <section class="panel">
+            <h2>${t("account.orders")}</h2>
+            ${lignes}
+          </section>
+          <form class="panel account-card" id="profil">
+            <h2>${t("account.info")}</h2>
+            <div class="form-row">
+              <div>${champ("profil-prenom", "prenom", "text", "given-name", t("cart.first"))}</div>
+              <div>${champ("profil-nom", "nom", "text", "family-name", t("cart.last"))}</div>
+            </div>
+            ${champ("profil-mail", "email", "email", "email", t("account.mail"))}
+            ${champ("profil-ville", "ville", "text", "address-level2", t("cart.city"))}
+            <p class="error" data-msg role="status"></p>
+            <button class="btn btn-red" type="submit">${t("account.save")}</button>
+          </form>
+        </div>
+      `;
+      espace.querySelector("#profil-prenom").value = compte.prenom;
+      espace.querySelector("#profil-nom").value = compte.nom;
+      espace.querySelector("#profil-mail").value = compte.email;
+      espace.querySelector("#profil-ville").value = compte.ville;
+    }
+
+    function dessiner() {
+      const compte = lireCompte();
+      if (compte && lireSession() === compte.email) salon();
+      else porte();
+    }
+
+    function motsEgaux(form) {
+      if (!form.elements.mdp2) return true;
+      return form.elements.mdp.value === form.elements.mdp2.value;
+    }
+
+    espace.addEventListener("click", (e) => {
+      const bascule = e.target.closest("[data-bascule]");
+      if (bascule) {
+        const oublier = bascule.dataset.bascule === "oublier";
+        espace.querySelector("#entrer").hidden = oublier;
+        espace.querySelector("#oublier").hidden = !oublier;
+        return;
+      }
+      if (e.target.closest("[data-sortir]")) {
+        deconnecter();
+        dessiner();
+      }
+    });
+
+    espace.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const msg = form.querySelector("[data-msg]");
+      const data = Object.fromEntries(new FormData(form));
+      if (!motsEgaux(form)) {
+        msg.textContent = t("account.mismatch");
+        return;
+      }
+      if (form.id === "entrer") {
+        msg.textContent = entrerCompte(data.email, data.mdp) ? "" : t("account.bad");
+        if (!msg.textContent) dessiner();
+        return;
+      }
+      if (form.id === "creer") {
+        const code = creerCompte(data);
+        msg.textContent = code === "exists" ? t("account.exists") : code === "short" ? t("account.short") : "";
+        if (!msg.textContent) dessiner();
+        return;
+      }
+      if (form.id === "oublier") {
+        const code = nouveauMdp(data.email, data.mdp);
+        if (code === "unknown") msg.textContent = t("account.unknown");
+        else if (code === "short") msg.textContent = t("account.short");
+        else {
+          msg.textContent = "";
+          espace.querySelector("#oublier").hidden = true;
+          const entrer = espace.querySelector("#entrer");
+          entrer.hidden = false;
+          entrer.querySelector("[data-msg]").textContent = t("account.resetOk");
+          entrer.elements.email.value = data.email.trim().toLowerCase();
+        }
+        return;
+      }
+      if (form.id === "profil") {
+        majCompte(data);
+        msg.textContent = t("account.saved");
+        espace.querySelector(".account-bar p").textContent = `${t("account.hello")} ${data.prenom.trim()}`;
+      }
+    });
+
+    dessiner();
+    document.addEventListener("langue", dessiner);
+  </script>
+</body>
+</html>

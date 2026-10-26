@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirmation | NBA Paris Game 2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kanit:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=49">
+</head>
+<body data-page="confirm">
+  <main class="wrap confirm" id="recu">
+    <p class="kicker">NBA Paris Game 2027</p>
+    <h1 data-i18n="ok.h1">Commande confirmée.</h1>
+    <p class="sub" data-i18n="ok.sub">Conservez votre numéro. Il tient lieu de confirmation pour l’entrée à l’Accor Arena.</p>
+  </main>
+  <script src="js/data.js"></script>
+  <script src="js/i18n.js?v=11"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/chrome.js?v=8"></script>
+  <script>
+    const recu = document.getElementById("recu");
+    const brut = sessionStorage.getItem("paris-game-2027-commande");
+    if (!brut) {
+      recu.insertAdjacentHTML("beforeend", `<p class="empty">${t("ok.none")}</p><a class="btn btn-light" href="billets.html">${t("cart.see")}</a>`);
+    } else {
+      const c = JSON.parse(brut);
+      recu.insertAdjacentHTML("beforeend", `
+        <p class="code">${c.numero}</p>
+        <p>${c.acheteur.prenom} ${c.acheteur.nom} · ${c.acheteur.email}</p>
+        <div class="panel">
+          ${c.lignes.map((l) => `<div class="line"><span>${l.qte} × ${l.nom}</span><strong>${euros(l.sousTotal)}</strong></div>`).join("")}
+          <div class="line total"><span>${t("ok.total")}</span><span>${euros(c.total)}</span></div>
+        </div>
+        <p class="muted" style="margin-top:1rem">${c.match.domicile} – ${c.match.exterieur}<br>${texte(c.match.date)} · ${c.match.heure} · ${c.match.lieu}</p>
+        <div class="actions">
+          <a class="btn btn-light" href="index.html">${t("ok.back")}</a>
+          <a class="btn btn-ghost" href="compte.html">${t("nav.account")}</a>
+        </div>
+      `);
+    }
+  </script>
+</body>
+</html>
