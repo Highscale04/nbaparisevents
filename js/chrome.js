@@ -40,40 +40,29 @@ function monterChrome() {
     const courant = p.href === ici ? ' aria-current="page"' : "";
     return `<a href="${p.href}" data-i18n="${p.key}"${courant}></a>`;
   }).join("");
-  const code = langue().toUpperCase();
   const offre = ici === "billets.html";
-  const menu = offre
-    ? `<button class="menu-btn menu-word" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><em data-i18n="nav.menu">Menu</em></button>`
-    : "";
-  const hamburger = offre
-    ? ""
-    : `<button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span></span><span></span><span></span></button>`;
-  const panier = offre ? `<a class="cart-link" href="panier.html" data-i18n="nav.cart">Panier</a>` : "";
+  const menu = `<button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>`;
+  const panier = `<a class="cart-link" href="panier.html"${ici === "panier.html" ? ' aria-current="page"' : ""} data-i18n="nav.cart">Panier</a>`;
+  const compte = `<a class="account-link" href="compte.html"${ici === "compte.html" ? ' aria-current="page"' : ""}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.2 19.2c1.3-3 3.7-4.5 6.8-4.5s5.5 1.5 6.8 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span data-i18n="nav.account">Espace client</span>
+          </a>`;
 
   document.body.insertAdjacentHTML("afterbegin", `
     <header class="nav${offre ? " nav-clear" : ""}">
       <div class="nav-inner">
-        ${menu}
+        ${offre ? menu : ""}
         <a class="logo${offre ? " logo-xp" : ""}" href="index.html" aria-label="${offre ? "NBA" : "NBA Paris Game 2027"}">
           <img src="${offre ? "images/logo-nba.png" : "images/logo-paris-2027.png"}" alt="${offre ? "NBA" : "NBA Paris Game 2027, presented by Tissot"}">
         </a>
         <nav class="links" id="nav-links">
           ${liens}
+          ${compte}
         </nav>
         <div class="nav-tools">
+          ${offre ? "" : menu}
+          <button class="lang-btn" type="button"></button>
           ${panier}
-          <a class="account-link" href="compte.html"${ici === "compte.html" ? ' aria-current="page"' : ""}>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.2 19.2c1.3-3 3.7-4.5 6.8-4.5s5.5 1.5 6.8 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-            <span data-i18n="nav.account">Espace client</span>
-          </a>
-          <div class="lang">
-            <button class="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Langue">${code}</button>
-            <div class="lang-menu" hidden>
-              <button type="button" data-set-lang="fr">FR</button>
-              <button type="button" data-set-lang="en">EN</button>
-            </div>
-          </div>
-          ${hamburger}
         </div>
       </div>
     </header>
@@ -108,25 +97,8 @@ function monterChrome() {
     bouton.setAttribute("aria-expanded", String(ouvert));
   });
 
-  const langBtn = document.querySelector(".lang-btn");
-  const langMenu = document.querySelector(".lang-menu");
-  langBtn.addEventListener("click", () => {
-    const ouvert = langMenu.hasAttribute("hidden");
-    langMenu.toggleAttribute("hidden", !ouvert);
-    langBtn.setAttribute("aria-expanded", String(ouvert));
-  });
-  langMenu.addEventListener("click", (e) => {
-    const choix = e.target.closest("[data-set-lang]");
-    if (!choix) return;
-    choisirLangue(choix.dataset.setLang);
-    langMenu.hidden = true;
-    langBtn.setAttribute("aria-expanded", "false");
-  });
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest(".lang")) {
-      langMenu.hidden = true;
-      langBtn.setAttribute("aria-expanded", "false");
-    }
+  document.querySelector(".lang-btn").addEventListener("click", () => {
+    choisirLangue(langue() === "fr" ? "en" : "fr");
   });
 
   if (offre) {

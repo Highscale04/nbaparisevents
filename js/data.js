@@ -24,7 +24,7 @@ const BILLETS = [
   {
     id: "boulevard",
     nom: { fr: "Catégorie 1", en: "Category 1" },
-    prix: 925,
+    prix: 325,
     tag: { fr: "Tribune Boulevard", en: "Boulevard stand" },
     etoiles: 4,
     vue: 5,
@@ -36,7 +36,7 @@ const BILLETS = [
   {
     id: "seine",
     nom: { fr: "Catégorie 3", en: "Category 3" },
-    prix: 665,
+    prix: 155,
     tag: { fr: "Tribune Seine", en: "Seine stand" },
     etoiles: 3,
     vue: 3,
@@ -48,7 +48,7 @@ const BILLETS = [
   {
     id: "studio",
     nom: { fr: "Catégorie 2", en: "Category 2" },
-    prix: 735,
+    prix: 235,
     tag: { fr: "Tribune Studio", en: "Studio stand" },
     etoiles: 4,
     vue: 4,
@@ -60,7 +60,7 @@ const BILLETS = [
   {
     id: "grand-hall",
     nom: { fr: "Catégorie 4", en: "Category 4" },
-    prix: 525,
+    prix: 95,
     tag: { fr: "Tribune Grand Hall", en: "Grand Hall stand" },
     etoiles: 3,
     vue: 3,
@@ -72,7 +72,7 @@ const BILLETS = [
   {
     id: "loges",
     nom: { fr: "Loges", en: "Suites" },
-    prix: 1060,
+    prix: 695,
     tag: { fr: "Premium", en: "Premium" },
     etoiles: 5,
     vue: 5,
@@ -84,13 +84,23 @@ const BILLETS = [
 ];
 
 const STOCK = {
-  parquet: 8,
+  parquet: 0,
   boulevard: 24,
-  seine: 30,
+  seine: 0,
   studio: 30,
   "grand-hall": 40,
   loges: 6
 };
+
+function plafond(id) {
+  const stock = STOCK[id] || 0;
+  if (id === "loges") return Math.min(stock, 1);
+  return stock;
+}
+
+function epuise(id) {
+  return plafond(id) < 1;
+}
 
 const MATCH = {
   date: { fr: "14 janvier 2027", en: "January 14, 2027" },

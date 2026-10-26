@@ -25,17 +25,19 @@ function trouverBillet(id) {
 
 function ajouter(id, quantite) {
   const billet = trouverBillet(id);
-  if (!billet || quantite < 1) return;
+  const max = plafond(id);
+  if (!billet || quantite < 1 || max < 1) return;
   const panier = lirePanier();
   const deja = panier[id] || 0;
-  panier[id] = Math.min(STOCK[id], deja + quantite);
+  panier[id] = Math.min(max, deja + quantite);
   sauverPanier(panier);
 }
 
 function definirQuantite(id, quantite) {
   const panier = lirePanier();
-  if (quantite <= 0) delete panier[id];
-  else panier[id] = Math.min(STOCK[id], quantite);
+  const max = plafond(id);
+  if (quantite <= 0 || max < 1) delete panier[id];
+  else panier[id] = Math.min(max, quantite);
   sauverPanier(panier);
 }
 
@@ -45,13 +47,25 @@ function viderPanier() {
 
 function detailPanier() {
   const panier = lirePanier();
+  let corrige = false;
   const lignes = Object.entries(panier)
     .map(([id, qte]) => {
       const billet = trouverBillet(id);
-      if (!billet) return null;
-      return { ...billet, nom: texte(billet.nom), tag: texte(billet.tag), description: texte(billet.description), qte, sousTotal: billet.prix * qte };
+      const max = plafond(id);
+      if (!billet || max < 1) {
+        delete panier[id];
+        corrige = true;
+        return null;
+      }
+      const q = Math.min(max, qte);
+      if (q !== qte) {
+        panier[id] = q;
+        corrige = true;
+      }
+      return { ...billet, nom: texte(billet.nom), tag: texte(billet.tag), description: texte(billet.description), qte: q, sousTotal: billet.prix * q };
     })
     .filter(Boolean);
+  if (corrige) sauverPanier(panier);
   const total = lignes.reduce((n, l) => n + l.sousTotal, 0);
   return { lignes, total };
 }
@@ -59,3 +73,39 @@ function detailPanier() {
 function euros(n) {
   return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(n);
 }
+
+function assainirPanier() {
+  const panier = lirePanier();
+  let corrige = false;
+  Object.keys(panier).forEach((id) => {
+    const max = plafond(id);
+    if (max < 1) {
+      delete panier[id];
+      corrige = true;
+    } else if (panier[id] > max) {
+      panier[id] = max;
+      corrige = true;
+    }
+  });
+  if (corrige) sauverPanier(panier);
+}
+
+assainirPanier();
+
+function assainirPanier() {
+  const panier = lirePanier();
+  let corrige = false;
+  Object.keys(panier).forEach((id) => {
+    const max = plafond(id);
+    if (max < 1) {
+      delete panier[id];
+      corrige = true;
+    } else if (panier[id] > max) {
+      panier[id] = max;
+      corrige = true;
+    }
+  });
+  if (corrige) sauverPanier(panier);
+}
+
+assainirPanier();

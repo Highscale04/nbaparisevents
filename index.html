@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kanit:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=50">
+  <link rel="stylesheet" href="css/styles.css?v=65">
 </head>
 <body data-page="home">
   <section class="hero hero-live">
@@ -85,8 +85,80 @@
   </section>
 
   <script src="js/data.js"></script>
-  <script src="js/i18n.js?v=12"></script>
+  <script src="js/i18n.js?v=18"></script>
   <script src="js/cart.js"></script>
-  <script src="js/chrome.js?v=8"></script>
+  <script src="js/chrome.js?v=10"></script>
+  <script>
+    (function () {
+      const ecran = document.createElement("div");
+      ecran.className = "queue";
+      ecran.hidden = true;
+      ecran.innerHTML = `
+        <div class="queue-card" role="status" aria-live="polite">
+          <header class="queue-top">
+            <img class="queue-logo" src="images/logo-nba.png" alt="">
+            <p class="queue-kicker" data-i18n="queue.kicker">Liste d’attente</p>
+          </header>
+          <div class="queue-main">
+            <p class="queue-num" data-place><span>4</span></p>
+            <p class="queue-spot" data-i18n="queue.spot">personnes devant vous</p>
+            <p class="queue-status" data-i18n="queue.s1">Connexion à la billetterie du Paris Game, à l’Accor Arena.</p>
+            <div class="queue-bar" aria-hidden="true"><span data-bar></span></div>
+          </div>
+          <ul class="queue-facts">
+            <li data-i18n="queue.f1">14 janvier 2027 · 20 h 30</li>
+            <li data-i18n="queue.f2">Accor Arena, Paris</li>
+            <li data-i18n="queue.f3">Pelicans contre Spurs</li>
+          </ul>
+        </div>`;
+      document.body.appendChild(ecran);
+
+      let actif = false;
+      document.addEventListener("click", (e) => {
+        const origine = e.target.closest ? e.target : e.target.parentElement;
+        const lien = origine && origine.closest('a[href="billets.html"]');
+        if (!lien || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button || actif) return;
+        e.preventDefault();
+        actif = true;
+        const total = 4;
+        const etapes = ["queue.s1", "queue.s2", "queue.s3", "queue.s4"];
+        let place = total;
+        let etape = 0;
+        const chiffre = ecran.querySelector("[data-place]");
+        const barre = ecran.querySelector("[data-bar]");
+        const status = ecran.querySelector(".queue-status");
+        const reduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const pas = reduit ? 70 : 420;
+        const dire = (cle) => {
+          const ecrire = () => { status.textContent = t(cle); status.classList.remove("is-out"); };
+          if (reduit) { ecrire(); return; }
+          status.classList.add("is-out");
+          setTimeout(ecrire, 70);
+        };
+        ecran.hidden = false;
+        document.body.classList.add("queue-on");
+        chiffre.innerHTML = `<span>${place}</span>`;
+        barre.style.width = "0%";
+        status.textContent = t(etapes[0]);
+        const timer = setInterval(() => {
+          place -= 1;
+          chiffre.innerHTML = `<span>${Math.max(place, 0)}</span>`;
+          const fait = (total - Math.max(place, 0)) / total;
+          barre.style.width = `${fait * 100}%`;
+          if (place <= 0) {
+            clearInterval(timer);
+            dire("queue.now");
+            setTimeout(() => { location.href = lien.href; }, reduit ? 80 : 280);
+            return;
+          }
+          const index = Math.min(etapes.length - 1, Math.floor(fait * etapes.length));
+          if (index !== etape) {
+            etape = index;
+            dire(etapes[index]);
+          }
+        }, pas);
+      });
+    })();
+  </script>
 </body>
 </html>

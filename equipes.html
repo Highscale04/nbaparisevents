@@ -2,44 +2,34 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Équipes | NBA Paris Game 2027</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Découvrez les équipes | NBA Paris Game 2027</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kanit:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=49">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kanit:ital,wght@0,500;0,600;0,700;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=58">
 </head>
 <body data-page="teams">
-  <header class="page-head">
-    <div class="wrap">
-      <p class="crumbs" data-i18n="teams.crumb">Affiche</p>
-      <h1 data-i18n="teams.h1">Pelicans et Spurs.</h1>
-      <p class="sub" data-i18n="teams.sub">L’affiche du 14 janvier 2027 à l’Accor Arena.</p>
-    </div>
-  </header>
-  <main class="section" style="padding-top:0.5rem">
-    <div class="wrap matchup">
-      <article class="team pelicans">
-        <p class="city">New Orleans Pelicans</p>
-        <h3 data-i18n="teams.pTitle">Le marais et le rythme.</h3>
-        <p data-i18n="teams.pBody">Franchise de Louisiane, les Pelicans jouent vite, avec beaucoup de transitions et un jeu intérieur physique. Leurs couleurs sont le marine, l’or et le rouge.</p>
-        <p class="muted" data-i18n="teams.pMeta">Conférence Ouest · salle habituelle : Smoothie King Center.</p>
-      </article>
-      <div class="vs">VS</div>
-      <article class="team spurs">
-        <p class="city">San Antonio Spurs</p>
-        <h3 data-i18n="teams.sTitle">La méthode.</h3>
-        <p data-i18n="teams.sBody">Les Spurs jouent un basket collectif, patient sur les tirs et exigeant en défense. Argent et noir dominent leur identité. Ils ferment l’affiche du 14 janvier.</p>
-        <p class="muted" data-i18n="teams.sMeta">Conférence Ouest · salle habituelle : Frost Bank Center.</p>
-      </article>
-    </div>
-    <div class="wrap" style="margin-top:1.5rem">
-      <a class="btn btn-red" href="billets.html" data-i18n="teams.cta">Prendre des places</a>
-    </div>
+  <main class="meet">
+    <section class="meet-hero">
+      <div class="meet-logos">
+        <img src="images/logo-spurs.png" alt="San Antonio Spurs">
+        <img src="images/logo-pelicans.png" alt="New Orleans Pelicans">
+      </div>
+      <h1 data-i18n="teams.h1">Découvrez les équipes</h1>
+      <p data-i18n="teams.lead">Les San Antonio Spurs et les New Orleans Pelicans se retrouvent à Paris en janvier 2027. Des cadres aux rookies, voici les deux effectifs de l’affiche.</p>
+      <div class="meet-jumps">
+        <a href="#spurs" data-i18n="teams.toSpurs">Découvrez les Spurs</a>
+        <a href="#pelicans" data-i18n="teams.toPelicans">Découvrez les Pelicans</a>
+      </div>
+      <img class="meet-cast" src="images/joueurs.png" alt="New Orleans Pelicans et San Antonio Spurs">
+    </section>
+    <div data-rosters></div>
   </main>
-  <script src="js/data.js"></script>
-  <script src="js/i18n.js?v=11"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/chrome.js?v=8"></script>
+  <script src="js/data.js?v=5"></script>
+  <script src="js/i18n.js?v=15"></script>
+  <script src="js/cart.js?v=7"></script>
+  <script src="js/chrome.js?v=10"></script>
+  <script src="js/teams.js?v=3"></script>
 </body>
 </html>

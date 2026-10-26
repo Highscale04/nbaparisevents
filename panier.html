@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kanit:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=51">
+  <link rel="stylesheet" href="css/styles.css?v=55">
 </head>
 <body data-page="cart">
   <header class="page-head">
@@ -44,11 +44,11 @@
       <button class="btn btn-red" type="submit" data-i18n="cart.pay">Payer</button>
     </form>
   </main>
-  <script src="js/data.js"></script>
-  <script src="js/i18n.js?v=12"></script>
-  <script src="js/cart.js"></script>
+  <script src="js/data.js?v=5"></script>
+  <script src="js/i18n.js?v=14"></script>
+  <script src="js/cart.js?v=7"></script>
   <script src="js/compte.js"></script>
-  <script src="js/chrome.js?v=8"></script>
+  <script src="js/chrome.js?v=10"></script>
   <script>
     const zone = document.getElementById("lignes");
     const tarif = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
@@ -87,11 +87,12 @@
                 </div>
                 <p class="cart-line-price">${tarif.format(l.sousTotal)}</p>
               </div>
-              <p class="cart-unit">${tarif.format(l.prix)} ${t("home.per")}</p>
+              <p class="cart-unit">${tarif.format(l.prix)} ${l.id === "loges" ? t("tickets.logePrice") : t("home.per")}</p>
+              ${l.id === "loges" ? `<p class="cart-unit">${t("tickets.logeNote")}</p>` : ""}
               <div class="qty" data-id="${l.id}">
                 <button type="button" data-step="-1" aria-label="−">−</button>
                 <span>${l.qte}</span>
-                <button type="button" data-step="1" aria-label="+">+</button>
+                <button type="button" data-step="1" aria-label="+" ${l.qte >= plafond(l.id) ? "disabled" : ""}>+</button>
               </div>
             </div>
           </article>`;

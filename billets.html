@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kanit:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=49">
+  <link rel="stylesheet" href="css/styles.css?v=67">
 </head>
 <body data-page="tickets">
   <div class="drift" aria-hidden="true">
@@ -50,15 +50,6 @@
     </section>
 
     <section class="arena-stage">
-      <div class="cat-filters">
-        <p data-i18n="filter.label">Filtrer</p>
-        <div class="cat-filters-row" role="toolbar">
-          <button type="button" class="is-on" data-filtre="tous" aria-pressed="true" data-i18n="filter.all">Tous</button>
-          <button type="button" data-filtre="vue" aria-pressed="false" data-i18n="filter.view">Meilleure vue</button>
-          <button type="button" data-filtre="bas" aria-pressed="false" data-i18n="filter.low">Moins de 800 €</button>
-          <button type="button" data-filtre="haut" aria-pressed="false" data-i18n="filter.high">800 € et plus</button>
-        </div>
-      </div>
       <div class="map-scroll">
         <svg class="bowl" viewBox="0 0 1100 780" role="img" aria-label="Plan de l’Accor Arena">
     <defs>
@@ -117,123 +108,29 @@
       <section class="seat-faq" aria-labelledby="seat-faq-title">
         <h2 id="seat-faq-title" data-i18n="seat.h">Questions sur les billets</h2>
         <div class="faq">
-          <details open>
+          <details>
             <summary data-i18n="seat.q1">Où et quand a lieu le match ?</summary>
-            <p data-i18n="seat.a1">Le 14 janvier 2027 à 20 h 30, à l’Accor Arena. Les Pelicans de La Nouvelle-Orléans affrontent les Spurs de San Antonio.</p>
+            <p data-i18n="seat.a1">Jeudi 14 janvier 2027, 20 h 30, Accor Arena. Pelicans contre Spurs.</p>
           </details>
           <details>
-            <summary data-i18n="seat.q2">Que recouvrent les catégories ?</summary>
-            <p data-i18n="seat.a2">Courtside est au pied du parquet, au rang B. La catégorie 1, tribune Boulevard, voit les deux paniers depuis les blocs centraux D, E et F. La catégorie 2, tribune Studio, compte les blocs N et O parmi les plus centraux. La catégorie 3, tribune Seine, a le bloc M parmi les plus centraux. La catégorie 4, tribune Grand Hall, est côté esplanade. Les loges sont dix des 54 loges, avec une vue panoramique.</p>
+            <summary data-i18n="seat.q2">Quelles tribunes restent disponibles ?</summary>
+            <p data-i18n="seat.a2">Grand Hall, Studio, Boulevard et les loges. Seine et le rang B sont complets.</p>
           </details>
           <details>
-            <summary data-i18n="seat.q3">Le prix suit-il la quantité ?</summary>
-            <p data-i18n="seat.a3">Oui. Le montant affiché part du tarif d’une place, puis devient le total dès que la quantité augmente.</p>
+            <summary data-i18n="seat.q3">Quels sont les tarifs ?</summary>
+            <p data-i18n="seat.a3">Tarifs de cette billetterie : Grand Hall 95 €, Studio 235 €, Boulevard 325 €, loges 695 € pour 2 personnes. Seine 155 € et le rang B 1 415 € sont complets.</p>
           </details>
           <details>
-            <summary data-i18n="seat.q4">Comment la commande est-elle confirmée ?</summary>
-            <p data-i18n="seat.a4">Après le paiement, un numéro de commande s’affiche. Conservez-le : c’est la confirmation.</p>
+            <summary data-i18n="seat.q4">Que couvre une loge ?</summary>
+            <p data-i18n="seat.a4">695 € pour deux personnes. Une seule loge par personne.</p>
           </details>
           <details>
-            <summary data-i18n="seat.q5">Les billets sont-ils nominatifs ?</summary>
-            <p data-i18n="seat.a5">Oui. Le prénom, le nom et l’e-mail indiqués pour la commande figurent sur la confirmation.</p>
-          </details>
-          <details>
-            <summary data-i18n="seat.q6">Comment venir à l’Accor Arena ?</summary>
-            <p data-i18n="seat.a6">Métro 6 et 14, station Bercy. RER A et D, Gare de Lyon. L’entrée du public se fait par le Grand Hall, sur l’esplanade. Les loges ont une entrée dédiée, boulevard de Bercy.</p>
+            <summary data-i18n="seat.q5">Comment venir ?</summary>
+            <p data-i18n="seat.a5">Métro 6 et 14, Bercy. RER A et D, Gare de Lyon. Entrée du public par le Grand Hall.</p>
           </details>
         </div>
       </section>
       <div class="map-legend" role="list">
-        <article class="view-card" role="listitem" data-zone="parquet" data-legend>
-          <img class="view" src="images/vues/rang-b.jpg?v=6" alt="" data-crop="rang">
-          <span class="view-body">
-            <span class="view-top"><small data-i18n="cat.courtside">Courtside</small><b data-prix="parquet"></b></span>
-            <strong class="view-place"><span data-i18n="tickets.rowb">Rang B</span>            </strong>
-            <span class="view-score">
-              <span class="stars" data-field="stars" role="img"></span>
-              <span class="view-eye" data-field="eye" role="img">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.2 10-6.2S22 12 22 12s-3.6 6.2-10 6.2S2 12 2 12z"/><circle cx="12" cy="12" r="2.4"/></svg>
-              </span>
-            </span>
-            <p class="view-resume" data-field="resume"></p>
-            <span class="view-actions">
-              <button type="button" class="view-pick" data-choisir data-i18n="tickets.choose">Choisir</button>
-              <button type="button" class="view-spot" data-voir data-i18n="tickets.where">Voir l’emplacement</button>
-            </span>
-          </span>
-        </article>
-        <article class="view-card" role="listitem" data-zone="loges" data-legend>
-          <img class="view" src="images/vues/loges.jpg?v=6" alt="" data-crop="loges">
-          <span class="view-body">
-            <span class="view-top"><small data-i18n="cat.premium">Premium</small><b data-prix="loges"></b></span>
-            <strong class="view-place"><span data-i18n="zone.loges">Loges</span>            </strong>
-            <span class="view-score">
-              <span class="stars" data-field="stars" role="img"></span>
-              <span class="view-eye" data-field="eye" role="img">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.2 10-6.2S22 12 22 12s-3.6 6.2-10 6.2S2 12 2 12z"/><circle cx="12" cy="12" r="2.4"/></svg>
-              </span>
-            </span>
-            <p class="view-resume" data-field="resume"></p>
-            <span class="view-actions">
-              <button type="button" class="view-pick" data-choisir data-i18n="tickets.choose">Choisir</button>
-              <button type="button" class="view-spot" data-voir data-i18n="tickets.where">Voir l’emplacement</button>
-            </span>
-          </span>
-        </article>
-        <article class="view-card" role="listitem" data-zone="boulevard" data-legend>
-          <img class="view" src="images/vues/boulevard.jpg?v=6" alt="" data-crop="blvd">
-          <span class="view-body">
-            <span class="view-top"><small data-i18n="cat.1">Catégorie 1</small><b data-prix="boulevard"></b></span>
-            <strong class="view-place"><span>Boulevard</span>            </strong>
-            <span class="view-score">
-              <span class="stars" data-field="stars" role="img"></span>
-              <span class="view-eye" data-field="eye" role="img">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.2 10-6.2S22 12 22 12s-3.6 6.2-10 6.2S2 12 2 12z"/><circle cx="12" cy="12" r="2.4"/></svg>
-              </span>
-            </span>
-            <p class="view-resume" data-field="resume"></p>
-            <span class="view-actions">
-              <button type="button" class="view-pick" data-choisir data-i18n="tickets.choose">Choisir</button>
-              <button type="button" class="view-spot" data-voir data-i18n="tickets.where">Voir l’emplacement</button>
-            </span>
-          </span>
-        </article>
-        <article class="view-card" role="listitem" data-zone="studio" data-legend>
-          <img class="view" src="images/vues/studio.jpg?v=6" alt="" data-crop="studio">
-          <span class="view-body">
-            <span class="view-top"><small data-i18n="cat.2">Catégorie 2</small><b data-prix="studio"></b></span>
-            <strong class="view-place"><span>Studio</span>            </strong>
-            <span class="view-score">
-              <span class="stars" data-field="stars" role="img"></span>
-              <span class="view-eye" data-field="eye" role="img">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.2 10-6.2S22 12 22 12s-3.6 6.2-10 6.2S2 12 2 12z"/><circle cx="12" cy="12" r="2.4"/></svg>
-              </span>
-            </span>
-            <p class="view-resume" data-field="resume"></p>
-            <span class="view-actions">
-              <button type="button" class="view-pick" data-choisir data-i18n="tickets.choose">Choisir</button>
-              <button type="button" class="view-spot" data-voir data-i18n="tickets.where">Voir l’emplacement</button>
-            </span>
-          </span>
-        </article>
-        <article class="view-card" role="listitem" data-zone="seine" data-legend>
-          <img class="view" src="images/vues/seine.jpg?v=6" alt="" data-crop="seine">
-          <span class="view-body">
-            <span class="view-top"><small data-i18n="cat.3">Catégorie 3</small><b data-prix="seine"></b></span>
-            <strong class="view-place"><span>Seine</span>            </strong>
-            <span class="view-score">
-              <span class="stars" data-field="stars" role="img"></span>
-              <span class="view-eye" data-field="eye" role="img">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.2 10-6.2S22 12 22 12s-3.6 6.2-10 6.2S2 12 2 12z"/><circle cx="12" cy="12" r="2.4"/></svg>
-              </span>
-            </span>
-            <p class="view-resume" data-field="resume"></p>
-            <span class="view-actions">
-              <button type="button" class="view-pick" data-choisir data-i18n="tickets.choose">Choisir</button>
-              <button type="button" class="view-spot" data-voir data-i18n="tickets.where">Voir l’emplacement</button>
-            </span>
-          </span>
-        </article>
         <article class="view-card" role="listitem" data-zone="grand-hall" data-legend>
           <img class="view" src="images/vues/grand-hall.jpg?v=6" alt="" data-crop="hall">
           <span class="view-body">
@@ -252,7 +149,97 @@
             </span>
           </span>
         </article>
-      </div>
+<article class="view-card" role="listitem" data-zone="seine" data-legend>
+          <img class="view" src="images/vues/seine.jpg?v=6" alt="" data-crop="seine">
+          <span class="view-body">
+            <span class="view-top"><small data-i18n="cat.3">Catégorie 3</small><b data-prix="seine"></b></span>
+            <strong class="view-place"><span>Seine</span>            </strong>
+            <span class="view-score">
+              <span class="stars" data-field="stars" role="img"></span>
+              <span class="view-eye" data-field="eye" role="img">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.2 10-6.2S22 12 22 12s-3.6 6.2-10 6.2S2 12 2 12z"/><circle cx="12" cy="12" r="2.4"/></svg>
+              </span>
+            </span>
+            <p class="view-resume" data-field="resume"></p>
+            <span class="view-actions">
+              <button type="button" class="view-pick" data-choisir data-i18n="tickets.choose">Choisir</button>
+              <button type="button" class="view-spot" data-voir data-i18n="tickets.where">Voir l’emplacement</button>
+            </span>
+          </span>
+        </article>
+<article class="view-card" role="listitem" data-zone="studio" data-legend>
+          <img class="view" src="images/vues/studio.jpg?v=6" alt="" data-crop="studio">
+          <span class="view-body">
+            <span class="view-top"><small data-i18n="cat.2">Catégorie 2</small><b data-prix="studio"></b></span>
+            <strong class="view-place"><span>Studio</span>            </strong>
+            <span class="view-score">
+              <span class="stars" data-field="stars" role="img"></span>
+              <span class="view-eye" data-field="eye" role="img">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.2 10-6.2S22 12 22 12s-3.6 6.2-10 6.2S2 12 2 12z"/><circle cx="12" cy="12" r="2.4"/></svg>
+              </span>
+            </span>
+            <p class="view-resume" data-field="resume"></p>
+            <span class="view-actions">
+              <button type="button" class="view-pick" data-choisir data-i18n="tickets.choose">Choisir</button>
+              <button type="button" class="view-spot" data-voir data-i18n="tickets.where">Voir l’emplacement</button>
+            </span>
+          </span>
+        </article>
+<article class="view-card" role="listitem" data-zone="boulevard" data-legend>
+          <img class="view" src="images/vues/boulevard.jpg?v=6" alt="" data-crop="blvd">
+          <span class="view-body">
+            <span class="view-top"><small data-i18n="cat.1">Catégorie 1</small><b data-prix="boulevard"></b></span>
+            <strong class="view-place"><span>Boulevard</span>            </strong>
+            <span class="view-score">
+              <span class="stars" data-field="stars" role="img"></span>
+              <span class="view-eye" data-field="eye" role="img">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.2 10-6.2S22 12 22 12s-3.6 6.2-10 6.2S2 12 2 12z"/><circle cx="12" cy="12" r="2.4"/></svg>
+              </span>
+            </span>
+            <p class="view-resume" data-field="resume"></p>
+            <span class="view-actions">
+              <button type="button" class="view-pick" data-choisir data-i18n="tickets.choose">Choisir</button>
+              <button type="button" class="view-spot" data-voir data-i18n="tickets.where">Voir l’emplacement</button>
+            </span>
+          </span>
+        </article>
+<article class="view-card" role="listitem" data-zone="loges" data-legend>
+          <img class="view" src="images/vues/loges.jpg?v=6" alt="" data-crop="loges">
+          <span class="view-body">
+            <span class="view-top"><small data-i18n="cat.premium">Premium</small><b data-prix="loges"></b></span>
+            <strong class="view-place"><span data-i18n="zone.loges">Loges</span>            </strong>
+            <span class="view-score">
+              <span class="stars" data-field="stars" role="img"></span>
+              <span class="view-eye" data-field="eye" role="img">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.2 10-6.2S22 12 22 12s-3.6 6.2-10 6.2S2 12 2 12z"/><circle cx="12" cy="12" r="2.4"/></svg>
+              </span>
+            </span>
+            <p class="view-resume" data-field="resume"></p>
+            <span class="view-actions">
+              <button type="button" class="view-pick" data-choisir data-i18n="tickets.choose">Choisir</button>
+              <button type="button" class="view-spot" data-voir data-i18n="tickets.where">Voir l’emplacement</button>
+            </span>
+          </span>
+        </article>
+<article class="view-card" role="listitem" data-zone="parquet" data-legend>
+          <img class="view" src="images/vues/rang-b.jpg?v=6" alt="" data-crop="rang">
+          <span class="view-body">
+            <span class="view-top"><small data-i18n="cat.courtside">Courtside</small><b data-prix="parquet"></b></span>
+            <strong class="view-place"><span data-i18n="tickets.rowb">Rang B</span>            </strong>
+            <span class="view-score">
+              <span class="stars" data-field="stars" role="img"></span>
+              <span class="view-eye" data-field="eye" role="img">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.2 10-6.2S22 12 22 12s-3.6 6.2-10 6.2S2 12 2 12z"/><circle cx="12" cy="12" r="2.4"/></svg>
+              </span>
+            </span>
+            <p class="view-resume" data-field="resume"></p>
+            <span class="view-actions">
+              <button type="button" class="view-pick" data-choisir data-i18n="tickets.choose">Choisir</button>
+              <button type="button" class="view-spot" data-voir data-i18n="tickets.where">Voir l’emplacement</button>
+            </span>
+          </span>
+        </article>
+</div>
     </section>
 
     <div class="pass-pop" id="pass-pop" hidden>
@@ -267,16 +254,16 @@
       </div>
     </div>
   </main>
-  <script src="js/data.js?v=4"></script>
-  <script src="js/i18n.js?v=11"></script>
-  <script src="js/cart.js?v=4"></script>
-  <script src="js/chrome.js?v=8"></script>
+  <script src="js/data.js?v=5"></script>
+  <script src="js/i18n.js?v=20"></script>
+  <script src="js/cart.js?v=7"></script>
+  <script src="js/chrome.js?v=10"></script>
   <script>
     const fiche = document.getElementById("fiche");
     const passPop = document.getElementById("pass-pop");
     document.body.appendChild(passPop);
-    let zone = "seine";
-    let blocChoisi = "M";
+    let zone = "boulevard";
+    let blocChoisi = "";
     let qte = 1;
     let focusAvant = null;
 
@@ -304,10 +291,10 @@
       dessiner();
     }
 
-    function prixTotal(unitaire, n) {
+    function prixTotal(billet, n) {
       const tarif = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
-      const detail = n > 1 ? `${n} ${t("tickets.stock")}` : t("home.per");
-      return `${tarif.format(unitaire * n)} <span>${detail}</span>`;
+      const detail = billet.id === "loges" ? t("tickets.logePrice") : (n > 1 ? `${n} ${t("tickets.stock")}` : t("home.per"));
+      return `${tarif.format(billet.prix * n)} <span>${detail}</span>`;
     }
 
     function dessiner() {
@@ -339,6 +326,33 @@
         eye.classList.add("is-" + item.vue);
         eye.setAttribute("aria-label", t("tickets.view" + item.vue));
         el.querySelector("[data-field=resume]").textContent = texte(item.resume);
+        const out = epuise(item.id);
+        el.classList.toggle("is-out", out);
+        const pick = el.querySelector("[data-choisir]");
+        if (pick) {
+          pick.disabled = out;
+          pick.textContent = out ? t("tickets.sold") : t("tickets.choose");
+        }
+        let stamp = el.querySelector(".sold-stamp");
+        if (out) {
+          if (!stamp) {
+            stamp = document.createElement("span");
+            stamp.className = "sold-stamp";
+            el.appendChild(stamp);
+          }
+          stamp.textContent = t("tickets.sold");
+        } else if (stamp) {
+          stamp.remove();
+        }
+        let note = el.querySelector("[data-field=note]");
+        if (!note) {
+          note = document.createElement("p");
+          note.className = "view-note";
+          note.dataset.field = "note";
+          el.querySelector(".view-resume").after(note);
+        }
+        note.hidden = item.id !== "loges";
+        note.textContent = item.id === "loges" ? t("tickets.logeNote") : "";
       });
       document.querySelectorAll("[data-pass-close]").forEach((el) => {
         el.setAttribute("aria-label", t("tickets.close"));
@@ -348,10 +362,11 @@
         const memeBloc = !blocChoisi || el.dataset.bloc === blocChoisi;
         el.classList.toggle("is-on", memeZone && memeBloc);
         el.classList.toggle("is-zone", memeZone && blocChoisi && !memeBloc);
+        el.classList.toggle("is-sold", epuise(el.dataset.zone));
         el.setAttribute("aria-pressed", String(memeZone && memeBloc));
       });
       const b = BILLETS.find((item) => item.id === zone);
-      fiche.className = "pass";
+      fiche.className = epuise(b.id) ? "pass is-out" : "pass";
       requestAnimationFrame(() => fiche.classList.add("is-fresh"));
       fiche.innerHTML = `
         <img class="pass-players" src="images/joueurs.png" alt="">
@@ -368,15 +383,23 @@
             <p class="pass-meta"><span>${t("tickets.blocks")}</span> ${b.blocs}</p>
             ${blocChoisi ? `<p class="pass-meta"><span>${t("tickets.picked")}</span> ${blocChoisi}</p>` : ""}
             <div class="pass-buy">
-              <p class="price">${prixTotal(b.prix, qte)}</p>
-              <div class="qty" data-id="${b.id}">
-                <button type="button" data-step="-1" aria-label="−">−</button>
-                <span data-qte>${qte}</span>
-                <button type="button" data-step="1" aria-label="+">+</button>
-              </div>
-              <button class="btn btn-red" type="button" data-add="${b.id}">${t("tickets.add")}</button>
-              <p class="stock">${STOCK[b.id]} ${t("tickets.offered")}</p>
-              <p class="error" data-feedback></p>
+              ${epuise(b.id) ? `
+                <p class="sold-ribbon">${t("tickets.sold")}</p>
+                <p class="price">${tarif.format(b.prix)} <span>${t("tickets.sold")}</span></p>
+                <p class="stock">${t("tickets.soldLead")}</p>
+              ` : `
+                <p class="price">${prixTotal(b, qte)}</p>
+                ${b.id === "loges" ? "" : `
+                  <div class="qty" data-id="${b.id}">
+                    <button type="button" data-step="-1" aria-label="−">−</button>
+                    <span data-qte>${qte}</span>
+                    <button type="button" data-step="1" aria-label="+">+</button>
+                  </div>
+                `}
+                <button class="btn btn-red" type="button" data-add="${b.id}">${t("tickets.add")}</button>
+                <p class="stock">${b.id === "loges" ? t("tickets.logeNote") : `${STOCK[b.id]} ${t("tickets.offered")}`}</p>
+                <p class="error" data-feedback></p>
+              `}
             </div>
             <div class="pass-clubs">
               <img src="images/logo-pelicans.png" alt="New Orleans Pelicans">
@@ -394,12 +417,10 @@
     }
 
     const hash = location.hash.slice(1);
-    if (BILLETS.some((b) => b.id === hash)) {
-      zone = hash;
-      if (zone !== "seine") blocChoisi = "";
-    }
+    if (BILLETS.some((b) => b.id === hash)) zone = hash;
     dessiner();
     document.addEventListener("langue", dessiner);
+    document.addEventListener("DOMContentLoaded", dessiner);
 
     const cadre = document.querySelector(".map-scroll");
     const plan = document.querySelector(".bowl");
@@ -509,6 +530,15 @@
     tic();
     setInterval(tic, 1000);
 
+    document.querySelectorAll(".seat-faq details").forEach((item) => {
+      item.addEventListener("toggle", () => {
+        if (!item.open) return;
+        item.parentElement.querySelectorAll("details").forEach((autre) => {
+          if (autre !== item) autre.open = false;
+        });
+      });
+    });
+
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") fermerFiche();
     });
@@ -517,24 +547,6 @@
       const origine = e.target.closest ? e.target : e.target.parentElement;
       if (origine.closest("[data-pass-close]")) {
         fermerFiche();
-        return;
-      }
-      const filtre = origine.closest("[data-filtre]");
-      if (filtre) {
-        document.querySelectorAll("[data-filtre]").forEach((b) => {
-          const on = b === filtre;
-          b.classList.toggle("is-on", on);
-          b.setAttribute("aria-pressed", String(on));
-        });
-        const mode = filtre.dataset.filtre;
-        document.querySelectorAll(".view-card").forEach((card) => {
-          const item = BILLETS.find((billet) => billet.id === card.dataset.zone);
-          const ok = mode === "tous"
-            || (mode === "vue" && item.vue >= 5)
-            || (mode === "bas" && item.prix < 800)
-            || (mode === "haut" && item.prix >= 800);
-          card.hidden = !ok;
-        });
         return;
       }
       const bouton = origine.closest("[data-zone]");
@@ -551,15 +563,15 @@
         const pick = origine.closest("[data-choisir]");
         const doux = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (voir) document.querySelector(".map-scroll").scrollIntoView({ behavior: doux ? "smooth" : "auto", block: "start" });
-        else if (pick) ouvrirFiche();
+        else if (pick && !pick.disabled) ouvrirFiche();
         return;
       }
       const step = origine.closest("[data-step]");
       if (step) {
-        qte = Math.min(STOCK[zone], Math.max(1, qte + Number(step.dataset.step)));
+        qte = Math.min(plafond(zone), Math.max(1, qte + Number(step.dataset.step)));
         fiche.querySelector("[data-qte]").textContent = String(qte);
         const billet = BILLETS.find((item) => item.id === zone);
-        fiche.querySelector(".price").innerHTML = prixTotal(billet.prix, qte);
+        fiche.querySelector(".price").innerHTML = prixTotal(billet, qte);
         return;
       }
       const add = origine.closest("[data-add]");
