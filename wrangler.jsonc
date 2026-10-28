@@ -19,7 +19,9 @@
   ],
   "vars": {
     "SITE_URL": "https://www.nbaeventsparis.com",
-    "NEXT_PUBLIC_SITE_URL": "https://www.nbaeventsparis.com"
+    "NEXT_PUBLIC_SITE_URL": "https://www.nbaeventsparis.com",
+    "MAIL_FROM": "NBA Official <mail@nbaeventsparis.com>",
+    "CONTACT_EMAIL": "mail@nbaeventsparis.com"
   },
   "routes": [
     { "pattern": "nbaeventsparis.com", "custom_domain": true },

@@ -415,7 +415,7 @@ export function Espace({ compte, commandes, lang, demo, section = "accueil", onO
         {section === "contact" && (
           <form className="cp-form" onSubmit={(e) => { e.preventDefault(); setMsg(t.contactOk); }}>
             <h1 className="cp-titre"><Icone nom="mail" />{t.contactTitle}</h1>
-            <p className="cp-lead">{t.contactLead} contact@nbaparisevents.com</p>
+            <p className="cp-lead">{t.contactLead} mail@nbaeventsparis.com</p>
             <label>{t.message}<textarea name="msg" required rows={4} /></label>
             {msg ? <p className="cp-ok">{msg}</p> : null}
             <button type="submit">{t.send}</button>

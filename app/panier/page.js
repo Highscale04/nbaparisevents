@@ -188,7 +188,7 @@ export default function CartPage() {
           )) : (
             <div className="cart-empty">
               <p>{expire ? t("cart.holdEnd") : t("cart.empty")}</p>
-              <Link className="btn cart-checkout" href="/billets">{t("cart.see")}</Link>
+              <Link className="btn cart-checkout" href="/paris-game">{t("cart.see")}</Link>
             </div>
           )}
         </section>

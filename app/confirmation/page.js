@@ -44,7 +44,7 @@ export default function ConfirmationPage() {
       ) : (
         <>
           <p className="empty">{t("ok.none")}</p>
-          <Link className="btn btn-light" href="/billets">{t("cart.see")}</Link>
+          <Link className="btn btn-light" href="/paris-game">{t("cart.see")}</Link>
         </>
       )}
     </main>

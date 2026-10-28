@@ -37,7 +37,7 @@ export default function HomePage() {
   useEffect(() => {
     if (!file?.lance) return;
     const reduit = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const id = setTimeout(() => router.push("/billets"), reduit ? 360 : 1600);
+    const id = setTimeout(() => router.push("/paris-game"), reduit ? 360 : 1600);
     return () => clearTimeout(id);
   }, [file?.lance, router]);
 
@@ -54,7 +54,7 @@ export default function HomePage() {
           <img className="hero-logo" src="/images/logo-paris-2027.png" width="2400" height="1430" alt="NBA Paris Game 2027, presented by Tissot" fetchPriority="high" decoding="async" />
           <p>{t("hero.text")}</p>
           <div className="hero-actions">
-            <Link className="btn btn-light" href="/billets" onClick={reserver}>{t("hero.cta")}</Link>
+            <Link className="btn btn-light" href="/paris-game" onClick={reserver}>{t("hero.cta")}</Link>
             <Link className="btn btn-ghost" href="/equipes">{t("hero.teams")}</Link>
           </div>
         </div>
@@ -92,7 +92,7 @@ export default function HomePage() {
             <p>{t("xp.more")}</p>
           </div>
         </div>
-        <a className="btn btn-light" href="mailto:contact@nbaparisevents.com?subject=R%C3%A9servation%20NBA%20Experiences%20%E2%80%94%20Paris%20Game%202027">{t("xp.cta")}</a>
+        <a className="btn btn-light" href="mailto:mail@nbaeventsparis.com?subject=R%C3%A9servation%20NBA%20Experiences%20%E2%80%94%20Paris%20Game%202027">{t("xp.cta")}</a>
       </section>
 
       {file ? (

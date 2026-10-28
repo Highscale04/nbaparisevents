@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useI18n } from "@/lib/providers";
 
-const MAIL = "mailto:contact@nbaparisevents.com?subject=R%C3%A9servation%20NBA%20Experiences%20%E2%80%94%20Paris%20Game%202027";
+const MAIL = "mailto:mail@nbaeventsparis.com?subject=R%C3%A9servation%20NBA%20Experiences%20%E2%80%94%20Paris%20Game%202027";
 
 export default function ExperiencesPage() {
   const { t } = useI18n();
@@ -35,7 +35,7 @@ export default function ExperiencesPage() {
             <span className="tag">{t("xp.t3")}</span>
             <h3>{t("xp.h3c")}</h3>
             <p>{t("xp.p3")}</p>
-            <Link className="btn btn-light" href="/billets">{t("xp.a3")}</Link>
+            <Link className="btn btn-light" href="/paris-game">{t("xp.a3")}</Link>
           </article>
         </div>
       </main>

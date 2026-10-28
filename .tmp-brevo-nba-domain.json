@@ -1,0 +1,49 @@
+{
+  "/senders/domains/nbaeventsparis.com": {
+    "status": 200,
+    "data": {
+      "domain": "nbaeventsparis.com",
+      "verified": false,
+      "authenticated": false,
+      "dns_records": {
+        "dkim_record": null,
+        "dkim1Record": {
+          "type": "CNAME",
+          "value": "b1.nbaeventsparis-com.dkim.brevo.com",
+          "host_name": "brevo1._domainkey",
+          "status": false
+        },
+        "dkim2Record": {
+          "type": "CNAME",
+          "value": "b2.nbaeventsparis-com.dkim.brevo.com",
+          "host_name": "brevo2._domainkey",
+          "status": false
+        },
+        "brevo_code": {
+          "type": "TXT",
+          "value": "brevo-code:6552edc02273e4dd8ee797a148b42c0c",
+          "host_name": "@",
+          "status": false
+        },
+        "dmarc_record": {
+          "type": "TXT",
+          "value": "v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com",
+          "host_name": "_dmarc",
+          "status": false
+        }
+      }
+    }
+  },
+  "/senders/domains/nbaeventsparis.com/authenticate": {
+    "status": 405,
+    "data": ""
+  },
+  "/smtp/domains/nbaeventsparis.com": {
+    "status": 404,
+    "data": "{\"code\":\"not_found\",\"message\":\"Invalid route/ method passed\"}"
+  },
+  "/senders/domains/6ae2760ab0839cbc8d0c53b0": {
+    "status": 404,
+    "data": "{\"code\":\"document_not_found\",\"message\":\"Domain does not exist\"}"
+  }
+}

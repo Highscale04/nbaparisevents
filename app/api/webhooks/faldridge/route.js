@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import { NextResponse } from "next/server";
+import { emailDepuisPaiement, envoyerMailsPaiement } from "@/lib/envoi-mails";
 import { clesSignature } from "@/lib/faldridge";
 import { getCommande, majCommandeWoo } from "@/lib/woo";
 
@@ -86,17 +87,26 @@ export async function POST(req) {
     const wc = await getCommande(Number(m[1]));
     if (!wc) return NextResponse.json({ ok: true, ignore: "commande" });
     if (succes) {
+      const email = emailDepuisPaiement(objet, data, wc);
       await majCommandeWoo(wc.id, {
         status: "processing",
         set_paid: true,
         transaction_id: texte(objet.id, data.id) || referenceFinale,
         payment_method: "faldridge",
         payment_method_title: "Faldridge",
+        ...(email ? { billing: { ...wc.billing, email } } : {}),
         meta_data: [
           { key: "_faldridge_status", value: "paid" },
-          { key: "_faldridge_event", value: type || status }
+          { key: "_faldridge_event", value: type || status },
+          ...(email ? [{ key: "_nba_email_client", value: email }] : [])
         ]
       });
+      const payee = await getCommande(wc.id);
+      try {
+        await envoyerMailsPaiement(payee || wc, { email, objet, data });
+      } catch (mailErr) {
+        console.error("[mail brevo]", mailErr instanceof Error ? mailErr.message : mailErr);
+      }
     } else {
       await majCommandeWoo(wc.id, {
         status: rembourse ? "refunded" : "failed",

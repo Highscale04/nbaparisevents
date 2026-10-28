@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useI18n } from "@/lib/providers";
 
-const MAIL = "mailto:contact@nbaparisevents.com?subject=R%C3%A9servation%20NBA%20Experiences%20%E2%80%94%20Paris%20Game%202027";
+const MAIL = "mailto:mail@nbaeventsparis.com?subject=R%C3%A9servation%20NBA%20Experiences%20%E2%80%94%20Paris%20Game%202027";
 
 const BLOCS = [
   ["faq.s1", [["faq.q1", "faq.a1"], ["faq.q2", "faq.a2"], ["faq.q3", "faq.a3"], ["faq.q4", "faq.a4"], ["faq.q5", "faq.a5"]]],
@@ -37,7 +37,7 @@ export default function FaqPage() {
             </div>
           </section>
         ))}
-        <Link className="btn btn-light faq-cta" href="/billets">{t("faq.cta")}</Link>
+        <Link className="btn btn-light faq-cta" href="/paris-game">{t("faq.cta")}</Link>
       </div>
     </main>
   );

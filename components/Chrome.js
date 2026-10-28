@@ -25,7 +25,7 @@ const SPONSORS = [
 
 const PAGES = {
   "/": "home",
-  "/billets": "tickets",
+  "/paris-game": "tickets",
   "/panier": "cart",
   "/confirmation": "confirm",
   "/compte": "account",

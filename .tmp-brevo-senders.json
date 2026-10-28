@@ -1,0 +1,46 @@
+{
+  "senders": [
+    {
+      "id": 7,
+      "name": "Roland Garros Tickets",
+      "email": "support@rolandgarrosbillets.com",
+      "active": true,
+      "ips": []
+    },
+    {
+      "id": 23,
+      "name": "Billetterie UBB",
+      "email": "support@ubbbilletteries.com",
+      "active": true,
+      "ips": []
+    },
+    {
+      "id": 24,
+      "name": "Billetterie UBB",
+      "email": "mail@ubbbilletteries.com",
+      "active": true,
+      "ips": []
+    },
+    {
+      "id": 25,
+      "name": "Billetterie XV de France",
+      "email": "mail@sixnationsofficial.com",
+      "active": true,
+      "ips": []
+    },
+    {
+      "id": 26,
+      "name": "FFF Billetterie",
+      "email": "support@fffbilletterieofficial.com",
+      "active": true,
+      "ips": []
+    },
+    {
+      "id": 27,
+      "name": "Billet XV de France",
+      "email": "support@sixnationsfrance.com",
+      "active": true,
+      "ips": []
+    }
+  ]
+}

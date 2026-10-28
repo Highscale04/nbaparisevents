@@ -1,0 +1,152 @@
+{
+  "domains": [
+    {
+      "id": "6abfb7840ed960b4c60af9f0",
+      "domain_name": "rolandgarrosbillets.com",
+      "authenticated": true,
+      "verified": true,
+      "validationRequest": null,
+      "verifier": null,
+      "authenticator": {
+        "id": "6aa1cb611b35f81a6a0bc33f",
+        "email": "privatexpo2@proton.me",
+        "method": "dns",
+        "creationDate": "2026-10-02T13:57:07+00:00"
+      },
+      "creator": {
+        "id": "6aa1cb611b35f81a6a0bc33f",
+        "email": "privatexpo2@proton.me",
+        "method": null,
+        "creationDate": "2026-10-02T13:54:12+00:00"
+      },
+      "ip": null,
+      "provider": "Other",
+      "authentication_source": null,
+      "dc_status": null,
+      "records": null
+    },
+    {
+      "id": "6ae217fafe68a04216059975",
+      "domain_name": "sixnationsofficial.com",
+      "authenticated": true,
+      "verified": true,
+      "validationRequest": null,
+      "verifier": null,
+      "authenticator": {
+        "id": "6aa1cb611b35f81a6a0bc33f",
+        "email": "privatexpo2@proton.me",
+        "method": "dns",
+        "creationDate": "2026-10-28T15:46:34+00:00"
+      },
+      "creator": {
+        "id": "6aa1cb611b35f81a6a0bc33f",
+        "email": "privatexpo2@proton.me",
+        "method": null,
+        "creationDate": "2026-10-28T15:42:50+00:00"
+      },
+      "ip": null,
+      "provider": "Namecheap",
+      "authentication_source": null,
+      "dc_status": null,
+      "records": null
+    },
+    {
+      "id": "6ae21e23e98653d4f805afb0",
+      "domain_name": "ubbbilletteries.com",
+      "authenticated": true,
+      "verified": true,
+      "validationRequest": null,
+      "verifier": null,
+      "authenticator": {
+        "id": "6aa1cb611b35f81a6a0bc33f",
+        "email": "privatexpo2@proton.me",
+        "method": "dns",
+        "creationDate": "2026-10-28T16:17:30+00:00"
+      },
+      "creator": {
+        "id": "6aa1cb611b35f81a6a0bc33f",
+        "email": "privatexpo2@proton.me",
+        "method": null,
+        "creationDate": "2026-10-28T16:09:07+00:00"
+      },
+      "ip": null,
+      "provider": "Namecheap",
+      "authentication_source": null,
+      "dc_status": null,
+      "records": null
+    },
+    {
+      "id": "6ae24e21c9d6ba94960dcdf3",
+      "domain_name": "fffbilletterieofficial.com",
+      "authenticated": true,
+      "verified": true,
+      "validationRequest": null,
+      "verifier": null,
+      "authenticator": {
+        "id": "6aa1cb611b35f81a6a0bc33f",
+        "email": "privatexpo2@proton.me",
+        "method": "dns",
+        "creationDate": "2026-10-28T19:48:16+00:00"
+      },
+      "creator": {
+        "id": "6aa1cb611b35f81a6a0bc33f",
+        "email": "privatexpo2@proton.me",
+        "method": null,
+        "creationDate": "2026-10-28T19:33:53+00:00"
+      },
+      "ip": null,
+      "provider": "Namecheap",
+      "authentication_source": null,
+      "dc_status": null,
+      "records": null
+    },
+    {
+      "id": "6ae25a5d4ea8f819dd0e766a",
+      "domain_name": "sixnationsfrance.com",
+      "authenticated": true,
+      "verified": true,
+      "validationRequest": null,
+      "verifier": null,
+      "authenticator": {
+        "id": "6aa1cb611b35f81a6a0bc33f",
+        "email": "privatexpo2@proton.me",
+        "method": "dns",
+        "creationDate": "2026-10-28T20:29:06+00:00"
+      },
+      "creator": {
+        "id": "6aa1cb611b35f81a6a0bc33f",
+        "email": "privatexpo2@proton.me",
+        "method": null,
+        "creationDate": "2026-10-28T20:26:05+00:00"
+      },
+      "ip": null,
+      "provider": "Cloudflare",
+      "authentication_source": null,
+      "dc_status": null,
+      "records": null
+    },
+    {
+      "id": "6ae2760ab0839cbc8d0c53b0",
+      "domain_name": "nbaeventsparis.com",
+      "authenticated": false,
+      "verified": false,
+      "validationRequest": null,
+      "verifier": null,
+      "authenticator": null,
+      "creator": {
+        "id": "6aa1cb611b35f81a6a0bc33f",
+        "email": "privatexpo2@proton.me",
+        "method": null,
+        "creationDate": "2026-10-28T22:24:10+00:00"
+      },
+      "ip": null,
+      "provider": "Cloudflare",
+      "authentication_source": null,
+      "dc_status": null,
+      "records": null
+    }
+  ],
+  "count": 6,
+  "current_page": 1,
+  "total_pages": 1
+}
