@@ -85,11 +85,11 @@ const BILLETS = [
 
 const STOCK = {
   parquet: 0,
-  boulevard: 24,
+  boulevard: 224,
   seine: 0,
-  studio: 30,
-  "grand-hall": 40,
-  loges: 6
+  studio: 230,
+  "grand-hall": 240,
+  loges: 206
 };
 
 function plafond(id) {
