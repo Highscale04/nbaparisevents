@@ -2,6 +2,7 @@
 .env
 .env.*
 !.env.local.example
+.dev.vars
 *.log
 node_modules/
 .next/

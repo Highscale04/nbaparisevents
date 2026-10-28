@@ -8,6 +8,8 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  "workers_dev": true,
+  "preview_urls": true,
   "observability": { "enabled": true },
   "services": [
     {
@@ -16,7 +18,11 @@
     }
   ],
   "vars": {
-    "SITE_URL": "https://nbaparisevents.com",
-    "NEXT_PUBLIC_SITE_URL": "https://nbaparisevents.com"
-  }
+    "SITE_URL": "https://www.nbaeventsparis.com",
+    "NEXT_PUBLIC_SITE_URL": "https://www.nbaeventsparis.com"
+  },
+  "routes": [
+    { "pattern": "nbaeventsparis.com", "custom_domain": true },
+    { "pattern": "www.nbaeventsparis.com", "custom_domain": true }
+  ]
 }
