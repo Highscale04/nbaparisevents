@@ -1,6 +1,12 @@
 .DS_Store
 .env
 .env.*
+!.env.local.example
 *.log
 node_modules/
+.next/
+.open-next/
+.wrangler/
 .netlify/
+.tools/
+.tmp-*.png

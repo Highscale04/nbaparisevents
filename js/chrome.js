@@ -30,8 +30,9 @@ function bandeSponsors() {
 }
 
 function pageCourante() {
-  const fichier = location.pathname.split("/").pop() || "index.html";
-  return fichier === "" ? "index.html" : fichier;
+  const bout = decodeURIComponent(location.pathname).split("/").filter(Boolean).pop() || "index";
+  if (bout === "index") return "index.html";
+  return bout.endsWith(".html") ? bout : `${bout}.html`;
 }
 
 function monterChrome() {
@@ -40,9 +41,9 @@ function monterChrome() {
     const courant = p.href === ici ? ' aria-current="page"' : "";
     return `<a href="${p.href}" data-i18n="${p.key}"${courant}></a>`;
   }).join("");
-  const offre = ici === "billets.html";
+  const offre = ici === "billets.html" || ici === "panier.html" || document.body.dataset.page === "tickets" || document.body.dataset.page === "cart";
   const menu = `<button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>`;
-  const panier = `<a class="cart-link" href="panier.html"${ici === "panier.html" ? ' aria-current="page"' : ""} data-i18n="nav.cart">Panier</a>`;
+  const panier = `<a class="cart-link" href="panier.html"${ici === "panier.html" ? ' aria-current="page"' : ""} aria-label="Panier"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.2 8.2h11.6l-1 11.1a1.3 1.3 0 0 1-1.3 1.2H8.5a1.3 1.3 0 0 1-1.3-1.2l-1-11.1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8.2V6.8a3 3 0 0 1 6 0v1.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="cart-count" data-cart-count hidden>0</span></a>`;
   const compte = `<a class="account-link" href="compte.html"${ici === "compte.html" ? ' aria-current="page"' : ""}>
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.2 19.2c1.3-3 3.7-4.5 6.8-4.5s5.5 1.5 6.8 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
             <span data-i18n="nav.account">Espace client</span>
@@ -103,35 +104,18 @@ function monterChrome() {
 
   if (offre) {
     const barre = document.querySelector(".nav-clear");
-    const seuil = 280;
-    let frame = 0;
-    const couleurs = [[0, [226, 24, 66]], [70, [196, 22, 72]], [220, [122, 40, 96]], [420, [42, 44, 98]], [640, [20, 38, 78]], [900, [11, 24, 52]], [1400, [0, 0, 0]]];
     let theme = document.querySelector('meta[name="theme-color"]');
     if (!theme) {
       theme = document.createElement("meta");
       theme.name = "theme-color";
       document.head.appendChild(theme);
     }
-    const teinte = (y) => {
-      let a = couleurs[0];
-      let b = couleurs[couleurs.length - 1];
-      for (let i = 0; i < couleurs.length - 1; i++) {
-        if (y >= couleurs[i][0] && y <= couleurs[i + 1][0]) {
-          a = couleurs[i];
-          b = couleurs[i + 1];
-          break;
-        }
-      }
-      const p = Math.min(1, Math.max(0, (y - a[0]) / (b[0] - a[0] || 1)));
-      const c = a[1].map((v, i) => Math.round(v + (b[1][i] - v) * p));
-      return `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
-    };
+    let frame = 0;
     const ombrer = () => {
       frame = 0;
-      const y = window.scrollY;
-      const t = Math.min(1, Math.max(0, y / seuil));
+      const t = Math.min(1, Math.max(0, window.scrollY / 220));
       barre.style.setProperty("--shade", t.toFixed(3));
-      theme.content = teinte(y);
+      theme.content = t > 0.55 ? "#000000" : "#e21842";
     };
     window.addEventListener("scroll", () => {
       if (!frame) frame = requestAnimationFrame(ombrer);

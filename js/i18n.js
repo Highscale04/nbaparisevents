@@ -163,6 +163,8 @@ const TEXTES = {
     "cart.city": "Ville",
     "cart.pay": "Payer",
     "cart.max": "max",
+    "cart.summary": "Récapitulatif",
+    "cart.remove": "Retirer",
     "teams.h1": "Découvrez les équipes",
     "teams.lead": "Les San Antonio Spurs et les New Orleans Pelicans se retrouvent à Paris en janvier 2027. Des cadres aux rookies, voici les deux effectifs de l’affiche.",
     "teams.toSpurs": "Découvrez les Spurs",
@@ -439,6 +441,8 @@ const TEXTES = {
     "cart.city": "City",
     "cart.pay": "Pay",
     "cart.max": "max",
+    "cart.summary": "Summary",
+    "cart.remove": "Remove",
     "teams.h1": "Meet the teams",
     "teams.lead": "The San Antonio Spurs and the New Orleans Pelicans meet in Paris in January 2027. From veterans to rookies, these are the two rosters on the card.",
     "teams.toSpurs": "Meet the Spurs",
@@ -582,6 +586,12 @@ function appliquerLangue(racine = document) {
   if (page && TEXTES[code]["title." + page]) document.title = t("title." + page);
   const compte = document.querySelector(".account-link");
   if (compte) compte.setAttribute("aria-label", t("nav.account"));
+  const panierLien = document.querySelector(".cart-link");
+  if (panierLien) {
+    const n = typeof totalArticles === "function" ? totalArticles() : 0;
+    const nom = t("nav.cart");
+    panierLien.setAttribute("aria-label", n > 0 ? `${nom} (${n})` : nom);
+  }
   const menu = document.querySelector(".menu-btn");
   if (menu) menu.setAttribute("aria-label", t("nav.menu"));
   const bouton = document.querySelector(".lang-btn");

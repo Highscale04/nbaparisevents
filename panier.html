@@ -2,12 +2,12 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Panier | NBA Paris Game 2027</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kanit:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=55">
+  <link rel="stylesheet" href="css/styles.css?v=80">
 </head>
 <body data-page="cart">
   <header class="page-head">
@@ -18,37 +18,21 @@
   </header>
   <main class="wrap cart-page">
     <section id="lignes"></section>
-    <form class="cart-pay" id="commande">
-      <p class="cart-kicker">Pelicans — Spurs</p>
-      <h2 data-i18n="cart.who">Vos coordonnées</h2>
-      <p class="cart-note" data-i18n="cart.note">Les billets sont nominatifs. La confirmation s’affiche à la fin de la commande.</p>
-      <div class="form-row">
-        <div>
-          <label for="prenom" data-i18n="cart.first">Prénom</label>
-          <input id="prenom" name="prenom" required autocomplete="given-name">
-        </div>
-        <div>
-          <label for="nom" data-i18n="cart.last">Nom</label>
-          <input id="nom" name="nom" required autocomplete="family-name">
-        </div>
-      </div>
-      <label for="email">E-mail</label>
-      <input id="email" name="email" type="email" required autocomplete="email">
-      <label for="ville" data-i18n="cart.city">Ville</label>
-      <input id="ville" name="ville" required autocomplete="address-level2">
+    <aside class="cart-pay" id="commande">
+      <h2 data-i18n="cart.summary">Récapitulatif</h2>
+      <p class="cart-match">Pelicans — Spurs · 14 janvier 2027</p>
       <div class="cart-sum">
         <span data-i18n="ok.total">Total</span>
         <strong data-cart-total>0 €</strong>
       </div>
-      <p class="error" id="form-msg" role="status"></p>
-      <button class="btn btn-red" type="submit" data-i18n="cart.pay">Payer</button>
-    </form>
+      <button class="btn cart-checkout" type="button" data-payer data-i18n="cart.pay">Payer</button>
+    </aside>
   </main>
   <script src="js/data.js?v=5"></script>
-  <script src="js/i18n.js?v=14"></script>
-  <script src="js/cart.js?v=7"></script>
+  <script src="js/i18n.js?v=22"></script>
+  <script src="js/cart.js?v=8"></script>
   <script src="js/compte.js"></script>
-  <script src="js/chrome.js?v=10"></script>
+  <script src="js/chrome.js?v=16"></script>
   <script>
     const zone = document.getElementById("lignes");
     const tarif = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
@@ -69,7 +53,7 @@
       const { lignes, total } = detailPanier();
       const formulaire = document.getElementById("commande");
       if (!lignes.length) {
-        zone.innerHTML = `<div class="cart-empty"><p>${t("cart.empty")}</p><a class="btn btn-light" href="billets.html">${t("cart.see")}</a></div>`;
+        zone.innerHTML = `<div class="cart-empty"><p>${t("cart.empty")}</p><a class="btn cart-checkout" href="billets.html">${t("cart.see")}</a></div>`;
         formulaire.hidden = true;
         return;
       }
@@ -79,20 +63,23 @@
         return `
           <article class="cart-ticket">
             <img src="${src}" alt="" style="object-position:${pos}">
-            <div>
-              <div class="cart-head">
+            <div class="cart-info">
+              <div class="cart-top">
                 <div>
                   <p class="cart-tag">${echapper(l.tag)}</p>
                   <strong>${echapper(l.nom)}</strong>
+                  <p class="cart-unit">${tarif.format(l.prix)} ${l.id === "loges" ? t("tickets.logePrice") : t("home.per")}</p>
+                  ${l.id === "loges" ? `<p class="cart-unit">${t("tickets.logeNote")}</p>` : ""}
                 </div>
                 <p class="cart-line-price">${tarif.format(l.sousTotal)}</p>
               </div>
-              <p class="cart-unit">${tarif.format(l.prix)} ${l.id === "loges" ? t("tickets.logePrice") : t("home.per")}</p>
-              ${l.id === "loges" ? `<p class="cart-unit">${t("tickets.logeNote")}</p>` : ""}
-              <div class="qty" data-id="${l.id}">
-                <button type="button" data-step="-1" aria-label="−">−</button>
-                <span>${l.qte}</span>
-                <button type="button" data-step="1" aria-label="+" ${l.qte >= plafond(l.id) ? "disabled" : ""}>+</button>
+              <div class="cart-actions">
+                <div class="qty" data-id="${l.id}">
+                  <button type="button" data-step="-1" aria-label="−">−</button>
+                  <span>${l.qte}</span>
+                  <button type="button" data-step="1" aria-label="+" ${l.qte >= plafond(l.id) ? "disabled" : ""}>+</button>
+                </div>
+                <button type="button" class="cart-remove" data-remove data-id="${l.id}">${t("cart.remove")}</button>
               </div>
             </div>
           </article>`;
@@ -101,6 +88,12 @@
     }
 
     zone.addEventListener("click", (e) => {
+      const retirer = e.target.closest("[data-remove]");
+      if (retirer) {
+        definirQuantite(retirer.dataset.id, 0);
+        dessiner();
+        return;
+      }
       const step = e.target.closest("[data-step]");
       if (!step) return;
       const id = step.closest(".qty").dataset.id;
@@ -109,16 +102,16 @@
       dessiner();
     });
 
-    document.getElementById("commande").addEventListener("submit", (e) => {
-      e.preventDefault();
+    document.querySelector("[data-payer]").addEventListener("click", () => {
       const { lignes, total } = detailPanier();
       if (!lignes.length) return;
-      const data = Object.fromEntries(new FormData(e.target));
+      const compte = lireCompte();
+      const connecte = compte && lireSession() === compte.email;
       const numero = "PG27-" + Math.random().toString(36).slice(2, 8).toUpperCase();
       const commande = {
         numero,
         date: new Date().toISOString(),
-        acheteur: data,
+        acheteur: connecte ? { prenom: compte.prenom, nom: compte.nom, email: compte.email, ville: compte.ville } : {},
         lignes: lignes.map(({ id, nom, prix, qte, sousTotal }) => ({ id, nom, prix, qte, sousTotal })),
         total,
         match: MATCH
@@ -132,13 +125,6 @@
     });
 
     dessiner();
-    const compte = lireCompte();
-    if (compte && lireSession() === compte.email) {
-      const form = document.getElementById("commande");
-      ["prenom", "nom", "email", "ville"].forEach((nom) => {
-        if (form.elements[nom] && !form.elements[nom].value) form.elements[nom].value = compte[nom] || "";
-      });
-    }
     document.addEventListener("langue", dessiner);
   </script>
 </body>

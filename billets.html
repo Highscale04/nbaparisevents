@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Kanit:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=67">
+  <link rel="stylesheet" href="css/styles.css?v=80">
 </head>
 <body data-page="tickets">
   <div class="drift" aria-hidden="true">
@@ -255,9 +255,9 @@
     </div>
   </main>
   <script src="js/data.js?v=5"></script>
-  <script src="js/i18n.js?v=20"></script>
-  <script src="js/cart.js?v=7"></script>
-  <script src="js/chrome.js?v=10"></script>
+  <script src="js/i18n.js?v=21"></script>
+  <script src="js/cart.js?v=8"></script>
+  <script src="js/chrome.js?v=16"></script>
   <script>
     const fiche = document.getElementById("fiche");
     const passPop = document.getElementById("pass-pop");
@@ -344,15 +344,6 @@
         } else if (stamp) {
           stamp.remove();
         }
-        let note = el.querySelector("[data-field=note]");
-        if (!note) {
-          note = document.createElement("p");
-          note.className = "view-note";
-          note.dataset.field = "note";
-          el.querySelector(".view-resume").after(note);
-        }
-        note.hidden = item.id !== "loges";
-        note.textContent = item.id === "loges" ? t("tickets.logeNote") : "";
       });
       document.querySelectorAll("[data-pass-close]").forEach((el) => {
         el.setAttribute("aria-label", t("tickets.close"));
@@ -397,7 +388,7 @@
                   </div>
                 `}
                 <button class="btn btn-red" type="button" data-add="${b.id}">${t("tickets.add")}</button>
-                <p class="stock">${b.id === "loges" ? t("tickets.logeNote") : `${STOCK[b.id]} ${t("tickets.offered")}`}</p>
+                ${b.id === "loges" ? "" : `<p class="stock">${STOCK[b.id]} ${t("tickets.offered")}</p>`}
                 <p class="error" data-feedback></p>
               `}
             </div>
@@ -577,7 +568,32 @@
       const add = origine.closest("[data-add]");
       if (!add) return;
       ajouter(zone, qte);
-      fiche.querySelector("[data-feedback]").textContent = qte > 1 ? `${qte} ${t("tickets.addedMany")}` : t("tickets.added");
+      const message = qte > 1 ? `${qte} ${t("tickets.addedMany")}` : t("tickets.added");
+      const billet = BILLETS.find((item) => item.id === zone);
+      const nom = texte(billet.tag);
+      fiche.querySelector("[data-feedback]").textContent = message;
+      let toast = document.querySelector(".cart-toast");
+      if (!toast) {
+        toast = document.createElement("div");
+        toast.className = "cart-toast";
+        toast.setAttribute("role", "status");
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = `<span class="cart-toast-mark" aria-hidden="true">✓</span><span>${nom} · ${message}</span>`;
+      toast.classList.remove("is-on");
+      void toast.offsetWidth;
+      toast.classList.add("is-on");
+      clearTimeout(toast._fin);
+      toast._fin = setTimeout(() => toast.classList.remove("is-on"), 3200);
+      const lien = document.querySelector(".cart-link");
+      if (lien) {
+        lien.classList.remove("is-pop");
+        void lien.offsetWidth;
+        lien.classList.add("is-pop");
+      }
+      add.classList.remove("is-added");
+      void add.offsetWidth;
+      add.classList.add("is-added");
     });
   </script>
 </body>

@@ -10,8 +10,14 @@ function lirePanier() {
 
 function sauverPanier(panier) {
   localStorage.setItem(CLE, JSON.stringify(panier));
+  const n = totalArticles(panier);
   document.querySelectorAll("[data-cart-count]").forEach((el) => {
-    el.textContent = String(totalArticles(panier));
+    el.textContent = String(n);
+    el.hidden = n < 1;
+  });
+  document.querySelectorAll(".cart-link").forEach((el) => {
+    const nom = typeof t === "function" ? t("nav.cart") : "Panier";
+    el.setAttribute("aria-label", n > 0 ? `${nom} (${n})` : nom);
   });
 }
 
