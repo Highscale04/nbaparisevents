@@ -2,6 +2,17 @@
 const nextConfig = {
   devIndicators: false,
   serverExternalPackages: ["pdf-lib", "qrcode"],
+  async headers() {
+    return [
+      {
+        source: "/images/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=86400, immutable" },
+          { key: "Access-Control-Allow-Origin", value: "*" }
+        ]
+      }
+    ];
+  },
   async redirects() {
     return [
       { source: "/billets", destination: "/paris-game", permanent: true },
