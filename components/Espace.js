@@ -257,6 +257,26 @@ export function Espace({ compte, commandes, lang, demo, section = "accueil", onO
   const prix = (n) => new Intl.NumberFormat(locale, { style: "currency", currency: "EUR" }).format(n);
   const pdf = `/apercu/ebillet?langue=${lang === "en" ? "en" : "fr"}`;
 
+  async function envoyer(e, type, titre) {
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(e.target));
+    const numero = d.commande || commandes[0]?.numero || "";
+    const raison = d.raison || d.msg || `Demande ${type} — ${profil.email}`;
+    if (!demo) {
+      const res = await fetch("/api/demande", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type, email: profil.email, numero, raison, message: d.msg || "" })
+      });
+      if (!res.ok) {
+        setMsg(lang === "en" ? "Could not send. Try again." : "Envoi impossible. Réessayez.");
+        return;
+      }
+    }
+    setDemandes((liste) => [...liste, { id: type, titre }]);
+    setMsg(titre);
+  }
+
   function lien(id) {
     const q = new URLSearchParams();
     if (demo) q.set("demo", "1");
@@ -373,7 +393,7 @@ export function Espace({ compte, commandes, lang, demo, section = "accueil", onO
           </>
         )}
         {section === "modifier" && (
-          <form className="cp-form" onSubmit={(e) => { e.preventDefault(); setDemandes((d) => [...d, { id: "mod", titre: t.editTitle }]); setMsg(t.editOk); }}>
+          <form className="cp-form" onSubmit={(e) => envoyer(e, "modifier", t.editOk)}>
             <h1 className="cp-titre"><Icone nom="swap" />{t.editTitle}</h1>
             <p className="cp-lead">{t.editLead}</p>
             <label>{t.message}<textarea name="msg" required placeholder={t.editPh} rows={4} /></label>
@@ -382,7 +402,7 @@ export function Espace({ compte, commandes, lang, demo, section = "accueil", onO
           </form>
         )}
         {section === "annuler" && (
-          <form className="cp-form" onSubmit={(e) => { e.preventDefault(); setDemandes((d) => [...d, { id: "ann", titre: t.cancelTitle }]); setMsg(t.cancelOk); }}>
+          <form className="cp-form" onSubmit={(e) => envoyer(e, "annuler", t.cancelOk)}>
             <h1 className="cp-titre"><Icone nom="back" />{t.cancelTitle}</h1>
             <p className="cp-lead">{t.cancelLead}</p>
             <label>{t.order}
@@ -398,7 +418,7 @@ export function Espace({ compte, commandes, lang, demo, section = "accueil", onO
           </form>
         )}
         {section === "non-recu" && (
-          <form className="cp-form" onSubmit={(e) => { e.preventDefault(); setMsg(`${t.resendOk} ${profil.email}.`); }}>
+          <form className="cp-form" onSubmit={(e) => envoyer(e, "contact", `${t.resendOk} ${profil.email}.`)}>
             <h1 className="cp-titre"><Icone nom="alert" />{t.missingTitle}</h1>
             <p className="cp-lead">{t.missingLead}</p>
             {msg ? <p className="cp-ok">{msg}</p> : null}
@@ -413,7 +433,7 @@ export function Espace({ compte, commandes, lang, demo, section = "accueil", onO
           </>
         )}
         {section === "contact" && (
-          <form className="cp-form" onSubmit={(e) => { e.preventDefault(); setMsg(t.contactOk); }}>
+          <form className="cp-form" onSubmit={(e) => envoyer(e, "contact", t.contactOk)}>
             <h1 className="cp-titre"><Icone nom="mail" />{t.contactTitle}</h1>
             <p className="cp-lead">{t.contactLead} mail@nbaeventsparis.com</p>
             <label>{t.message}<textarea name="msg" required rows={4} /></label>

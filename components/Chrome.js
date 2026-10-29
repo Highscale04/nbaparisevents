@@ -107,6 +107,8 @@ export function Chrome({ children }) {
     return () => vu.disconnect();
   }, [page, pathname]);
 
+  if (pathname.startsWith("/e-billet") || pathname.startsWith("/apercu/validite")) return children;
+
   const menu = (
     <button className="menu-btn" type="button" aria-expanded={ouvert} aria-controls="nav-links" aria-label={t("nav.menu")} onClick={() => setOuvert((v) => !v)}>
       <span /><span /><span />

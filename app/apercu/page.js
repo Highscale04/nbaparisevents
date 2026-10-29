@@ -32,6 +32,11 @@ export default function ApercuMails() {
         <h2>3 · E-billet PDF</h2>
         <iframe key={langue} className="apercu-pdf" title="E-billet PDF" src={`/apercu/ebillet?langue=${langue}`} />
       </section>
+
+      <section>
+        <h2>4 · Scan QR — billet valide</h2>
+        <iframe className="apercu-pdf" title="Page de validité" src="/apercu/validite" />
+      </section>
     </main>
   );
 }
